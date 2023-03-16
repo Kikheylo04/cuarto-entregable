@@ -1,29 +1,20 @@
 const UserService = require("../services/userService");
 
-const createUSer = async (req, res) => {
+const getListUsers = async (req, res, next) => {
   try {
-    const data = req.body;
-    const newUser = await UserService.create(data);
-    res.status(201).json(newUser);
+    const listUsers = await UserService.getListUsers();
+    res.status(201).json(listUsers);
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
-const listUser = async (req, res) => {
+const  getConversations = async (req, res, next) => {
   try {
-    const listUsers = await UserService.list();
-    res.status(200).json(listUsers);
+ const {id} = req.params;
+ const listConversations = await UserService.getConversations()
+ res.status(201).json(listConversations);
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
-const detailUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await UserService.detail(id);
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(400).json(error);
-  }
-};
-module.exports = { createUSer, listUser, detailUser };
+module.exports = { getListUsers , getConversations};

@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const db = require("../utils/database");
-const Type = {
-  COUPLE: "conversación en pareja",
-  GROUP: "conversación grupal",
+const ConversationType = {
+  PERSONAL: "Personal",
+  GROUP: "Grupal",
 };
 
 const Conversation = db.define("conversations", {
@@ -17,14 +17,9 @@ const Conversation = db.define("conversations", {
     allowNull: false,
   },
   type: {
-    type: DataTypes.ENUM(Object.values(Type)),
-    defaultValue: Type.COUPLE,
+    type: DataTypes.ENUM(Object.values(ConversationType)),
+    defaultValue: ConversationType.PERSONAL,
     allowNull: false,
-  },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    field: "user_id",
   },
 });
 

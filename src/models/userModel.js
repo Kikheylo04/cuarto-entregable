@@ -27,18 +27,11 @@ const User = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    name: {
+    firstname: {
       type: DataTypes.STRING(30),
-      allowNull: false,
     },
     lastname: {
       type: DataTypes.STRING(30),
-      allowNull: false,
-    },
-    conversationId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      field: "conversation_id",
     },
   },
   {

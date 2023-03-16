@@ -1,19 +1,17 @@
 const User = require("./userModel");
 const Conversation = require("./conversationModel");
 const Message = require("./messageModel");
+const UserConversation = require("./userConversationModel");
 
 const initModel = () => {
-  User.hasMany(Conversation, { foreignKey: "userId" });
-  Conversation.belongsTo(User, { foreignKey: "userId" });
+  User.hasMany(UserConversation, { foreignKey: "userId" });
+  UserConversation.belongsTo(User, { foreignKey: "userId" });
 
-  User.hasMany(Message, { foreignKey: "userId" });
-  Message.belongsTo(User, { foreignKey: "userId" });
+  Conversation.hasMany(UserConversation, { foreignKey: "conversationId" });
+  UserConversation.belongsTo(Conversation, { foreignKey: "conversationId" });
 
-  Conversation.hasMany(Message, { foreignKey: "conversationId" });
-  Message.belongsTo(Conversation, { foreignKey: "conversationId" });
-
-  Conversation.hasMany(User, { foreignKey: "conversationId" });
-  User.belongsTo(Conversation, { foreignKey: "conversationId" });
+  UserConversation.hasMany(Message, { foreignKey: "userConversationId" });
+  Message.belongsTo(UserConversation, { foreignKey: "userConversationId" });
 };
 
 module.exports = initModel;
